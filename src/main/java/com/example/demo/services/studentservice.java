@@ -1,5 +1,8 @@
 package com.example.demo.services;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,4 +26,20 @@ public class studentservice {
 		this.sr.findById(id);
 		return "Find succesfully " + id;
 	}
+	public List<student>getAll(){
+		return (List<student>) this.sr.findAll();
+	}
+	public Optional<student> getById(int id){
+		return this.sr.findById(id);
+	}
+	public student updateStudent(student s) {
+		int id =s.getId();
+		student st = sr.findById(id).get();
+		st.setName(s.getName());
+		st.setEmail(s.getEmail());
+		st.setPassword(s.getPassword());
+		st.setMobileno(s.getMobileno());
+		return this.sr.save(st);
+	}
+	
 }
